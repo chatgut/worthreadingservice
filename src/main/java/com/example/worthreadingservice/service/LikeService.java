@@ -1,15 +1,12 @@
 package com.example.worthreadingservice.service;
 
+import com.example.worthreadingservice.dto.UserDto;
 import com.example.worthreadingservice.entity.MessageEntity;
 import com.example.worthreadingservice.entity.UserEntity;
 import com.example.worthreadingservice.repository.MessageRepository;
 import com.example.worthreadingservice.repository.UserRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,12 +14,12 @@ import java.util.stream.Collectors;
 
 
 @Service
-public class MessageRatingService  {
+public class LikeService {
 
     MessageRepository messageRepo;
     UserRepository userRepo;
 
-    public MessageRatingService(MessageRepository messageRepo, UserRepository userRepo) {
+    public LikeService(MessageRepository messageRepo, UserRepository userRepo) {
         this.messageRepo = messageRepo;
         this.userRepo = userRepo;
     }

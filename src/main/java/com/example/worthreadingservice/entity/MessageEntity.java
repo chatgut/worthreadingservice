@@ -23,7 +23,4 @@ public class MessageEntity {
     @ManyToMany(fetch =  FetchType.EAGER)
     private Set<UserEntity> userIds = new HashSet<>();
 
-
-
-
 }

@@ -1,7 +1,7 @@
 package com.example.worthreadingservice.controller;
 
-import com.example.worthreadingservice.service.MessageRatingService;
-import com.example.worthreadingservice.service.UserDto;
+import com.example.worthreadingservice.service.LikeService;
+import com.example.worthreadingservice.dto.UserDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,9 +11,9 @@ import java.util.List;
 @RequestMapping("/api")
 public class LikeController {
 
-    private final MessageRatingService messageRatingService;
+    private final LikeService messageRatingService;
 
-    public LikeController(MessageRatingService messageRatingService) {
+    public LikeController(LikeService messageRatingService) {
         this.messageRatingService = messageRatingService;
     }
 
