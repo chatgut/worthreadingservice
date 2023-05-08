@@ -27,7 +27,7 @@ public class LikeService {
     public void addLike(Long messageId, Long userId) {
         MessageEntity message = messageRepo.findById(messageId).orElse(null);
         if (message == null) {
-            message = new MessageEntity();
+            message = new MessageEntity(messageId);
             message.setId(messageId);
         }
 
