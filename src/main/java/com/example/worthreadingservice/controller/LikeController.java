@@ -1,5 +1,7 @@
-package com.example.worthreadingservice.worthreading;
+package com.example.worthreadingservice.controller;
 
+import com.example.worthreadingservice.service.MessageRatingService;
+import com.example.worthreadingservice.service.UserDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -7,11 +9,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-public class Controller {
+public class LikeController {
 
-    private MessageRatingService messageRatingService;
+    private final MessageRatingService messageRatingService;
 
-    public Controller(MessageRatingService messageRatingService) {
+    public LikeController(MessageRatingService messageRatingService) {
         this.messageRatingService = messageRatingService;
     }
 
@@ -29,18 +31,20 @@ public class Controller {
         int likesCount = messageRatingService.getAmountOfLikes(messageId);
         return ResponseEntity.ok(likesCount);
     }
+    @GetMapping("/like/isLiked/{messageId}/{userId}")
+    ResponseEntity<Boolean> isLiked(@PathVariable Long messageId, @PathVariable Long userId){
+        boolean isLiked = messageRatingService.isLiked(messageId, userId);
+        return ResponseEntity.ok(isLiked);
+    }
 
-    @GetMapping("/dislike/users/{messageId}")
-    List<UserDto> getDislikeUsers(@PathVariable Long messageId) {
+    @GetMapping("/like/users/{messageId}")
+    List<UserDto> getUsersWhoLikeMessage(@PathVariable Long messageId) {
         return messageRatingService.getUsersWhoLikeMessage(messageId);
     }
 
-    @GetMapping("/dislike/messages/{userId}")
+    @GetMapping("/like/messages/{userId}")
     List<UserDto> getMessagesLikedByUser(@PathVariable Long userId) {
         return messageRatingService.getMessagesLikedByUser(userId);
     }
-
-
-
 
 }
