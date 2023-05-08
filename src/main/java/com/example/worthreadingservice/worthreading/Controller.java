@@ -16,7 +16,7 @@ public class Controller {
     }
 
     @PutMapping("/like/{messageId}/{userId}/{liked}")
-    ResponseEntity toggleLike(@PathVariable Long messageId, @PathVariable Long userId, @PathVariable boolean liked) {
+    ResponseEntity<Void> toggleLike(@PathVariable Long messageId, @PathVariable Long userId, @PathVariable boolean liked) {
         if (liked)
             messageRatingService.removeLike(messageId, userId);
          else
@@ -32,9 +32,15 @@ public class Controller {
 
     @GetMapping("/dislike/users/{messageId}")
     List<UserDto> getDislikeUsers(@PathVariable Long messageId) {
-        return messageRatingService.getUsersWhoDisliked(messageId);
-
+        return messageRatingService.getUsersWhoLikeMessage(messageId);
     }
+
+    @GetMapping("/dislike/messages/{userId}")
+    List<UserDto> getMessagesLikedByUser(@PathVariable Long userId) {
+        return messageRatingService.getMessagesLikedByUser(userId);
+    }
+
+
 
 
 }
