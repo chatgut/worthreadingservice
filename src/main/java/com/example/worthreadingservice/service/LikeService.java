@@ -5,18 +5,13 @@ import com.example.worthreadingservice.entity.MessageEntity;
 import com.example.worthreadingservice.entity.UserEntity;
 import com.example.worthreadingservice.repository.MessageRepository;
 import com.example.worthreadingservice.repository.UserRepository;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.transaction.Transactional;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -79,22 +74,19 @@ public class LikeService {
 
 
     private List<UserDto> callUserApi(String csv) {
+
         RestTemplate restTemplate = new RestTemplate();
-        String url = "http://localhost:8080/users/" + csv;
+        String url = "http://localhost:8081/users/" + csv;
         String jsonResponse = restTemplate.getForObject(url, String.class);
         return parseUserJson(jsonResponse);
     }
 
     private List<UserDto> parseUserJson(String jsonResponse) {
-        List<UserDto> users = new ArrayList<>();
-
-        //Todo: implement
+        Gson gson = new Gson();
+        Type listType = new TypeToken<List<UserDto>>(){}.getType();
+        List<UserDto> users = gson.fromJson(jsonResponse, listType);
 
         return users;
-
-
-
-
     }
 
 
