@@ -11,40 +11,40 @@ import java.util.List;
 @RequestMapping("/api")
 public class LikeController {
 
-    private final LikeService messageRatingService;
+    private final LikeService likeService;
 
     public LikeController(LikeService messageRatingService) {
-        this.messageRatingService = messageRatingService;
+        this.likeService = messageRatingService;
     }
 
     @PutMapping("/like/{messageId}/{userId}/{liked}")
     ResponseEntity<Void> toggleLike(@PathVariable Long messageId, @PathVariable Long userId, @PathVariable boolean liked) {
         if (liked)
-            messageRatingService.removeLike(messageId, userId);
+            likeService.removeLike(messageId, userId);
          else
-            messageRatingService.addLike(messageId, userId);
+            likeService.addLike(messageId, userId);
          return ResponseEntity.ok().build();
     }
 
     @GetMapping("/like/amount/{messageId}")
     ResponseEntity<Integer> getAmountOfLikes(@PathVariable Long messageId){
-        int likesCount = messageRatingService.getAmountOfLikes(messageId);
+        int likesCount = likeService.getAmountOfLikes(messageId);
         return ResponseEntity.ok(likesCount);
     }
     @GetMapping("/like/isLiked/{messageId}/{userId}")
     ResponseEntity<Boolean> isLiked(@PathVariable Long messageId, @PathVariable Long userId){
-        boolean isLiked = messageRatingService.isLiked(messageId, userId);
+        boolean isLiked = likeService.isLiked(messageId, userId);
         return ResponseEntity.ok(isLiked);
     }
 
     @GetMapping("/like/users/{messageId}")
     List<UserDto> getUsersWhoLikeMessage(@PathVariable Long messageId) {
-        return messageRatingService.getUsersWhoLikeMessage(messageId);
+        return likeService.getUsersWhoLikeMessage(messageId);
     }
 
     @GetMapping("/like/messages/{userId}")
     List<UserDto> getMessagesLikedByUser(@PathVariable Long userId) {
-        return messageRatingService.getMessagesLikedByUser(userId);
+        return likeService.getMessagesLikedByUser(userId);
     }
 
 }

@@ -5,9 +5,18 @@ import com.example.worthreadingservice.entity.MessageEntity;
 import com.example.worthreadingservice.entity.UserEntity;
 import com.example.worthreadingservice.repository.MessageRepository;
 import com.example.worthreadingservice.repository.UserRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.transaction.Transactional;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -56,6 +65,7 @@ public class LikeService {
     }
 
 
+
     public List<UserDto> getUsersWhoLikeMessage(Long messageId) {
         return callUserApi(messageRepo.findById(messageId)
                 .orElseThrow()
@@ -66,12 +76,26 @@ public class LikeService {
                 .collect(Collectors.joining(",")));
     }
 
+
+
     private List<UserDto> callUserApi(String csv) {
-        //Todo: implement
-        return new ArrayList<>();
+        RestTemplate restTemplate = new RestTemplate();
+        String url = "http://localhost:8080/users/" + csv;
+        String jsonResponse = restTemplate.getForObject(url, String.class);
+        return parseUserJson(jsonResponse);
     }
 
+    private List<UserDto> parseUserJson(String jsonResponse) {
+        List<UserDto> users = new ArrayList<>();
 
+        //Todo: implement
+
+        return users;
+
+
+
+
+    }
 
 
     public List<UserDto> getMessagesLikedByUser(Long userId) {
