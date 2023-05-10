@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/worthreading")
 public class LikeController {
 
     private final LikeService likeService;
@@ -26,15 +26,20 @@ public class LikeController {
          return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/like/amount/{messageId}")
-    ResponseEntity<Integer> getAmountOfLikes(@PathVariable Long messageId){
-        int likesCount = likeService.getAmountOfLikes(messageId);
-        return ResponseEntity.ok(likesCount);
-    }
     @GetMapping("/like/isLiked/{messageId}/{userId}")
     ResponseEntity<Boolean> isLiked(@PathVariable Long messageId, @PathVariable Long userId){
         boolean isLiked = likeService.isLiked(messageId, userId);
         return ResponseEntity.ok(isLiked);
+    }
+
+
+    /** Endpoints below is not implemented in the frontend yet.
+     */
+
+    @GetMapping("/like/amount/{messageId}")
+    ResponseEntity<Integer> getAmountOfLikes(@PathVariable Long messageId){
+        int likesCount = likeService.getAmountOfLikes(messageId);
+        return ResponseEntity.ok(likesCount);
     }
 
     @GetMapping("/like/users/{messageId}")
@@ -44,7 +49,7 @@ public class LikeController {
 
     @GetMapping("/like/messages/{userId}")
     List<UserDto> getMessagesLikedByUser(@PathVariable Long userId) {
-        //Todo: implement
+        //Todo: implement in likeService
         return likeService.getMessagesLikedByUser(userId);
     }
 
