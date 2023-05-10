@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/worthreading/like/")
 public class LikeController {
 
     private final LikeService likeService;
@@ -17,7 +17,7 @@ public class LikeController {
         this.likeService = messageRatingService;
     }
 
-    @PutMapping("/like/{messageId}/{userId}/{liked}")
+    @PutMapping("{messageId}/{userId}/{liked}")
     ResponseEntity<Void> toggleLike(@PathVariable Long messageId, @PathVariable Long userId, @PathVariable boolean liked) {
         if (liked)
             likeService.removeLike(messageId, userId);
@@ -26,25 +26,30 @@ public class LikeController {
          return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/like/amount/{messageId}")
-    ResponseEntity<Integer> getAmountOfLikes(@PathVariable Long messageId){
-        int likesCount = likeService.getAmountOfLikes(messageId);
-        return ResponseEntity.ok(likesCount);
-    }
-    @GetMapping("/like/isLiked/{messageId}/{userId}")
+    @GetMapping("isLiked/{messageId}/{userId}")
     ResponseEntity<Boolean> isLiked(@PathVariable Long messageId, @PathVariable Long userId){
         boolean isLiked = likeService.isLiked(messageId, userId);
         return ResponseEntity.ok(isLiked);
     }
 
-    @GetMapping("/like/users/{messageId}")
+
+    /** Endpoints below is not implemented in the frontend yet.
+     */
+
+    @GetMapping("amount/{messageId}")
+    ResponseEntity<Integer> getAmountOfLikes(@PathVariable Long messageId){
+        int likesCount = likeService.getAmountOfLikes(messageId);
+        return ResponseEntity.ok(likesCount);
+    }
+
+    @GetMapping("users/{messageId}")
     List<UserDto> getUsersWhoLikeMessage(@PathVariable Long messageId) {
         return likeService.getUsersWhoLikeMessage(messageId);
     }
 
-    @GetMapping("/like/messages/{userId}")
+    @GetMapping("messages/{userId}")
     List<UserDto> getMessagesLikedByUser(@PathVariable Long userId) {
-        //Todo: implement
+        //Todo: implement in likeService
         return likeService.getMessagesLikedByUser(userId);
     }
 

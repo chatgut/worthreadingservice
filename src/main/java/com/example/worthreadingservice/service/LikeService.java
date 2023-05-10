@@ -59,8 +59,6 @@ public class LikeService {
         return messageRepo.findById(messageId).map(m -> m.getUserIds().size()).orElse(0);
     }
 
-
-
     public List<UserDto> getUsersWhoLikeMessage(Long messageId) {
         return callUserApi(messageRepo.findById(messageId)
                 .orElseThrow()
@@ -71,12 +69,10 @@ public class LikeService {
                 .collect(Collectors.joining(",")));
     }
 
-
-
     private List<UserDto> callUserApi(String csv) {
 
         RestTemplate restTemplate = new RestTemplate();
-        String url = "http://localhost:8081/users/" + csv;
+        String url = "http://localhost:8002/users/" + csv;
         String jsonResponse = restTemplate.getForObject(url, String.class);
         return parseUserJson(jsonResponse);
     }
@@ -84,16 +80,11 @@ public class LikeService {
     private List<UserDto> parseUserJson(String jsonResponse) {
         Gson gson = new Gson();
         Type listType = new TypeToken<List<UserDto>>(){}.getType();
-        List<UserDto> users = gson.fromJson(jsonResponse, listType);
-
-        return users;
+        return gson.fromJson(jsonResponse, listType);
     }
-
 
     public List<UserDto> getMessagesLikedByUser(Long userId) {
         //Todo: implement
         return new ArrayList<>();
     }
-
-
 }
