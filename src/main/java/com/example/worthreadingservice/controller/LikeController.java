@@ -32,20 +32,23 @@ public class LikeController {
         return ResponseEntity.ok(isLiked);
     }
 
-
-    /** Endpoints below is not implemented in the frontend yet.
-     */
-
     @GetMapping("amount/{messageId}")
     ResponseEntity<Integer> getAmountOfLikes(@PathVariable Long messageId){
         int likesCount = likeService.getAmountOfLikes(messageId);
         return ResponseEntity.ok(likesCount);
     }
 
+    /** Endpoint below is not implemented in the frontend yet and is depending on user service 2 running */
+
     @GetMapping("users/{messageId}")
     List<UserDto> getUsersWhoLikeMessage(@PathVariable Long messageId) {
         return likeService.getUsersWhoLikeMessage(messageId);
     }
+
+    /** Endpoint below is not implemented in the frontend nor here yet.
+     * The message service may or may not have implemented an endpoint for this to use.
+     * The code in likeService for this to work should be about the same as "getUsersWhoLikeMessage".
+     */
 
     @GetMapping("messages/{userId}")
     List<UserDto> getMessagesLikedByUser(@PathVariable Long userId) {
