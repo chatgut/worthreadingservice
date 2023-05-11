@@ -17,7 +17,7 @@ import java.util.Set;
 public class MessageEntity {
 
     @Id
-    private Long id;
+    private String id;
 
 
     @ManyToMany(fetch =  FetchType.EAGER)

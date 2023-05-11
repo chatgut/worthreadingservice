@@ -15,7 +15,7 @@ import java.util.Set;
 public class UserEntity {
 
     @Id
-    private Long id;
+    private String id;
 
     @ManyToMany(mappedBy = "userIds")
     private Set <MessageEntity> likedMessages = new HashSet<>();

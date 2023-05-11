@@ -4,7 +4,7 @@ import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface MessageRepository extends ListCrudRepository<MessageEntity, Long> {
+public interface MessageRepository extends ListCrudRepository<MessageEntity, String> {
 
 
 

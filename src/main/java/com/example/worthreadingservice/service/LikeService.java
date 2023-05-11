@@ -28,7 +28,7 @@ public class LikeService {
         this.userRepo = userRepo;
     }
 
-    public void addLike(Long messageId, Long userId) {
+    public void addLike(String messageId, String userId) {
         MessageEntity message = messageRepo.findById(messageId).orElse(null);
         if (message == null) {
             message = new MessageEntity();
@@ -47,24 +47,23 @@ public class LikeService {
     }
 
     @Transactional
-    public void removeLike(Long messageId, Long userId) {
+    public void removeLike(String messageId, String userId) {
         messageRepo.findById(messageId).ifPresent(m -> m.getUserIds().removeIf(user -> user.getId().equals(userId)));
     }
 
-    public boolean isLiked(Long messageId, Long userId) {
+    public boolean isLiked(String messageId, String userId) {
         return messageRepo.findById(messageId).map(m -> m.getUserIds().stream().anyMatch(u -> u.getId().equals(userId))).orElse(false);
     }
 
-    public int getAmountOfLikes(Long messageId) {
+    public int getAmountOfLikes(String messageId) {
         return messageRepo.findById(messageId).map(m -> m.getUserIds().size()).orElse(0);
     }
 
-    public List<UserDto> getUsersWhoLikeMessage(Long messageId) {
+    public List<UserDto> getUsersWhoLikeMessage(String messageId) {
         return callUserApi(messageRepo.findById(messageId)
                 .orElseThrow()
                 .getUserIds()
                 .stream()
-                .map(UserEntity::getId)
                 .map(Object::toString)
                 .collect(Collectors.joining(",")));
     }
@@ -83,7 +82,7 @@ public class LikeService {
         return gson.fromJson(jsonResponse, listType);
     }
 
-    public List<UserDto> getMessagesLikedByUser(Long userId) {
+    public List<UserDto> getMessagesLikedByUser(String userId) {
         //Todo: implement
         return new ArrayList<>();
     }

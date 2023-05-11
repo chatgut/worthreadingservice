@@ -7,8 +7,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
-@RequestMapping("/worthreading/like/")
+@RequestMapping("/like/")
 public class LikeController {
 
     private final LikeService likeService;
@@ -17,31 +18,32 @@ public class LikeController {
         this.likeService = messageRatingService;
     }
 
-    @PutMapping("{messageId}/{userId}/{liked}")
-    ResponseEntity<Void> toggleLike(@PathVariable Long messageId, @PathVariable Long userId, @PathVariable boolean liked) {
-        if (liked)
+    @PutMapping("toggleLike/{messageId}/{userId}")
+    ResponseEntity<Void> toggleLike(@PathVariable String messageId, @PathVariable String userId) {
+        if (likeService.isLiked(messageId, userId))
             likeService.removeLike(messageId, userId);
-         else
+        else
             likeService.addLike(messageId, userId);
-         return ResponseEntity.ok().build();
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("isLiked/{messageId}/{userId}")
-    ResponseEntity<Boolean> isLiked(@PathVariable Long messageId, @PathVariable Long userId){
+    ResponseEntity<Boolean> isLiked(@PathVariable String messageId, @PathVariable String userId){
         boolean isLiked = likeService.isLiked(messageId, userId);
         return ResponseEntity.ok(isLiked);
     }
 
     @GetMapping("amount/{messageId}")
-    ResponseEntity<Integer> getAmountOfLikes(@PathVariable Long messageId){
+    ResponseEntity<Integer> getAmountOfLikes(@PathVariable String messageId){
         int likesCount = likeService.getAmountOfLikes(messageId);
         return ResponseEntity.ok(likesCount);
     }
 
-    /** Endpoint below is not implemented in the frontend yet and is depending on user service 2 running */
+    /** Endpoint below is not implemented in the frontend yet and is depending on userService2 running
+     * It however works with userService2 */
 
     @GetMapping("users/{messageId}")
-    List<UserDto> getUsersWhoLikeMessage(@PathVariable Long messageId) {
+    List<UserDto> getUsersWhoLikeMessage(@PathVariable String messageId) {
         return likeService.getUsersWhoLikeMessage(messageId);
     }
 
@@ -51,7 +53,7 @@ public class LikeController {
      */
 
     @GetMapping("messages/{userId}")
-    List<UserDto> getMessagesLikedByUser(@PathVariable Long userId) {
+    List<UserDto> getMessagesLikedByUser(@PathVariable String userId) {
         //Todo: implement in likeService
         return likeService.getMessagesLikedByUser(userId);
     }
