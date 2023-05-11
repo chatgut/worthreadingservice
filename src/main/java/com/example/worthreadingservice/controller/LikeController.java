@@ -18,8 +18,8 @@ public class LikeController {
         this.likeService = messageRatingService;
     }
 
-    @PutMapping("toggleLike/{messageId}/{userId}")
-    ResponseEntity<Void> toggleLike(@PathVariable String messageId, @PathVariable String userId) {
+    @PutMapping("toggleLike/{messageId}")
+    ResponseEntity<Void> toggleLike(@PathVariable String messageId, @RequestHeader String userId) {
         if (likeService.isLiked(messageId, userId))
             likeService.removeLike(messageId, userId);
         else
