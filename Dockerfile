@@ -1,5 +1,6 @@
-FROM eclipse-temurin:17-jdk
+FROM openjdk:17-jdk-slim
 #RUN mvn clean package
+#./mvnw test -PnativeTest
 
 COPY target/*.jar app.jar
 WORKDIR /app
