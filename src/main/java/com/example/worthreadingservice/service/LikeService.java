@@ -5,6 +5,9 @@ import com.example.worthreadingservice.entity.MessageEntity;
 import com.example.worthreadingservice.entity.UserEntity;
 import com.example.worthreadingservice.repository.MessageRepository;
 import com.example.worthreadingservice.repository.UserRepository;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -12,8 +15,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -64,7 +66,7 @@ public class LikeService {
                 .orElseThrow()
                 .getUserIds()
                 .stream()
-                .map(Object::toString)
+                .map(UserEntity::getId)
                 .collect(Collectors.joining(",")));
     }
 
@@ -86,4 +88,25 @@ public class LikeService {
         //Todo: implement
         return new ArrayList<>();
     }
+
+    public Map<String, Boolean> bulkIsLiked(String messageIds, String userId) {
+
+        Gson gson = new Gson();
+        JsonObject jsonObject = JsonParser.parseString(messageIds).getAsJsonObject();
+        JsonArray jsonArray = jsonObject.getAsJsonArray("messageIds");
+        Type listType = new TypeToken<List<String>>(){}.getType();
+        List<String> messageIdList = gson.fromJson(jsonArray, listType);
+
+        Map<String, Boolean> map = new HashMap<>();
+
+        for (String messageId : messageIdList) {
+            map.put(messageId, isLiked(messageId, userId));
+        }
+
+
+
+        return map;
+
+    }
+
 }

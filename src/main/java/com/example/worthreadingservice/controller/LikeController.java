@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin
 @RestController
@@ -25,6 +26,11 @@ public class LikeController {
         else
             likeService.addLike(messageId, userId);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("bulkIsLiked")
+    Map<String, Boolean> bulkIsLiked(@RequestBody String messageIds, @RequestHeader String userId) {
+        return likeService.bulkIsLiked(messageIds, userId);
     }
 
     @GetMapping("isLiked/{messageId}/{userId}")
@@ -57,5 +63,12 @@ public class LikeController {
         //Todo: implement in likeService
         return likeService.getMessagesLikedByUser(userId);
     }
+
+
+
+
+
+
+
 
 }
