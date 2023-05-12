@@ -99,14 +99,13 @@ public class LikeService {
 
         Map<String, Boolean> map = new HashMap<>();
 
-        for (String messageId : messageIdList) {
-            map.put(messageId, isLiked(messageId, userId));
-        }
+        List<String> likedMessageIds = messageRepo.findLikedMessageIdsByUser(messageIdList, userId);
 
-
+        for (String messageId : messageIdList)
+            map.put(messageId, likedMessageIds.contains(messageId));
 
         return map;
-
     }
+
 
 }
