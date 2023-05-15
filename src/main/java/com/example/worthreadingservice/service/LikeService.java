@@ -14,7 +14,6 @@ import org.springframework.web.client.RestTemplate;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
-
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -57,9 +56,28 @@ public class LikeService {
         return messageRepo.findById(messageId).map(m -> m.getUserIds().stream().anyMatch(u -> u.getId().equals(userId))).orElse(false);
     }
 
+    public Map<String, Boolean> bulkIsLiked(String messageIds, String userId) {
+        Gson gson = new Gson();
+        Type listType = new TypeToken<List<String>>() {}.getType();
+
+        JsonObject jsonObject = JsonParser.parseString(messageIds).getAsJsonObject();
+        JsonArray jsonArray = jsonObject.getAsJsonArray("messageIds");
+
+        List<String> messageIdList = gson.fromJson(jsonArray, listType);
+        List<String> likedMessageIds = messageRepo.findLikedMessageIdsByUser(messageIdList, userId);
+
+        return messageIdList.stream()
+                .collect(Collectors.toMap(
+                        messageId -> messageId, likedMessageIds::contains));
+    }
+
     public int getAmountOfLikes(String messageId) {
         return messageRepo.findById(messageId).map(m -> m.getUserIds().size()).orElse(0);
     }
+
+
+
+
 
     public List<UserDto> getUsersWhoLikeMessage(String messageId) {
         return callUserApi(messageRepo.findById(messageId)
@@ -89,23 +107,7 @@ public class LikeService {
         return new ArrayList<>();
     }
 
-    public Map<String, Boolean> bulkIsLiked(String messageIds, String userId) {
 
-        Gson gson = new Gson();
-        JsonObject jsonObject = JsonParser.parseString(messageIds).getAsJsonObject();
-        JsonArray jsonArray = jsonObject.getAsJsonArray("messageIds");
-        Type listType = new TypeToken<List<String>>(){}.getType();
-        List<String> messageIdList = gson.fromJson(jsonArray, listType);
-
-        Map<String, Boolean> map = new HashMap<>();
-
-        List<String> likedMessageIds = messageRepo.findLikedMessageIdsByUser(messageIdList, userId);
-
-        for (String messageId : messageIdList)
-            map.put(messageId, likedMessageIds.contains(messageId));
-
-        return map;
-    }
 
 
 }
