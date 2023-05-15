@@ -1,6 +1,5 @@
 FROM openjdk:17-jdk-slim
-#RUN mvn clean package
-#./mvnw test -PnativeTest
+#RUN mvn package -Pnative native:compile -DskipTests
 
 COPY target/*.jar app.jar
 WORKDIR /app
