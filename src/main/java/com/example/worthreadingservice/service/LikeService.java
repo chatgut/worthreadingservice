@@ -76,7 +76,8 @@ public class LikeService {
     }
 
 
-
+    /** Methods is depending on userService2 running
+     */
 
 
     public List<UserDto> getUsersWhoLikeMessage(String messageId) {
@@ -101,13 +102,5 @@ public class LikeService {
         Type listType = new TypeToken<List<UserDto>>(){}.getType();
         return gson.fromJson(jsonResponse, listType);
     }
-
-    public List<UserDto> getMessagesLikedByUser(String userId) {
-        //Todo: implement
-        return new ArrayList<>();
-    }
-
-
-
 
 }

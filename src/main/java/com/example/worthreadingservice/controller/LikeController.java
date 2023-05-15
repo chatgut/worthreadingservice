@@ -53,22 +53,4 @@ public class LikeController {
         return likeService.getUsersWhoLikeMessage(messageId);
     }
 
-    /** Endpoint below is not implemented in the frontend nor here yet.
-     * The message service may or may not have implemented an endpoint for this to use.
-     * The code in likeService for this to work should be about the same as "getUsersWhoLikeMessage".
-     */
-
-    @GetMapping("messages/{userId}")
-    List<UserDto> getMessagesLikedByUser(@PathVariable String userId) {
-        //Todo: implement in likeService
-        return likeService.getMessagesLikedByUser(userId);
-    }
-
-
-
-
-
-
-
-
 }
