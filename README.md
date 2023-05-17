@@ -32,7 +32,7 @@ It is a part of a larger application and provides RESTful APIs to handle likes o
 - GET /like/users/{messageId}
 
 ## Download docker image
-#### Native arm64 native image:
+#### Native arm64 image:
 - docker pull cchriss123/worthreadingservice:1.0.0
 
 #### Regular JVM version image
