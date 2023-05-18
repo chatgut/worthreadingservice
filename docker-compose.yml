@@ -2,8 +2,12 @@ version: '3.8'
 
 services:
   app:
-    build:
-      context: .
+#    build:
+#      context: .
+#      dockerfile: Dockerfile-graalvm
+
+    #image: ghcr.io/chatgut/worthreadingservice
+    image: cchriss123/worthreadingservice:1.1.0
     container_name: worthreadingservice
     depends_on:
       mysql:

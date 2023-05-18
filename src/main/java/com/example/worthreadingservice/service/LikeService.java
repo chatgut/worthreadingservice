@@ -9,6 +9,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import jakarta.transaction.Transactional;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import com.google.gson.Gson;
@@ -23,6 +24,7 @@ public class LikeService {
 
     MessageRepository messageRepo;
     UserRepository userRepo;
+
 
     public LikeService(MessageRepository messageRepo, UserRepository userRepo) {
         this.messageRepo = messageRepo;
@@ -67,18 +69,15 @@ public class LikeService {
         List<String> likedMessageIds = messageRepo.findLikedMessageIdsByUser(messageIdList, userId);
 
         return messageIdList.stream()
-                .collect(Collectors.toMap(
-                        messageId -> messageId, likedMessageIds::contains));
+                .collect(Collectors.toMap(messageId -> messageId, likedMessageIds::contains));
     }
 
     public int getAmountOfLikes(String messageId) {
         return messageRepo.findById(messageId).map(m -> m.getUserIds().size()).orElse(0);
     }
 
-
     /** Methods is depending on userService2 running
      */
-
 
     public List<UserDto> getUsersWhoLikeMessage(String messageId) {
         return callUserApi(messageRepo.findById(messageId)
@@ -88,6 +87,7 @@ public class LikeService {
                 .map(UserEntity::getId)
                 .collect(Collectors.joining(",")));
     }
+
 
     private List<UserDto> callUserApi(String csv) {
 
