@@ -6,7 +6,7 @@ on:
   push:
     branches: [ "master" ]
   # tags: [ 'amd64 native' ]
-    tags: [ 'JVM' ]
+  tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:JVM
   pull_request:
     branches: [ "master" ]
 
