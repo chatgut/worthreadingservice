@@ -57,7 +57,7 @@
 
     <build>
         <plugins>
-            <!--
+            <!--   comment out this seassion for jvm compile     -->
            <plugin>
                <groupId>org.graalvm.buildtools</groupId>
                <artifactId>native-maven-plugin</artifactId>
