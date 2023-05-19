@@ -9,11 +9,11 @@ on:
   schedule:
     - cron: '34 13 * * *'
   push:
-    branches: [ "amd64native" ]
+    branches: [ "master" ]
     # Publish semver tags as releases.
-    tags: [ 'v*.*.*' ]
+    tags: [ 'amd64 native' ]
   pull_request:
-    branches: [ "amd64native" ]
+    branches: [ "master" ]
 
 env:
   # Use docker.io for Docker Hub if empty
