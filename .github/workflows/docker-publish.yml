@@ -5,8 +5,8 @@ on:
     - cron: '34 13 * * *'
   push:
     branches: [ "master" ]
-  # tags: [ 'amd64 native' ]
-  tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:JVM
+  # tags: [ 'amd64' ]
+    tags: [ 'jvm' ]
   pull_request:
     branches: [ "master" ]
 
