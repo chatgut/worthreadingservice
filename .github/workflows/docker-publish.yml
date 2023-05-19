@@ -5,22 +5,22 @@ name: Docker
 # separate terms of service, privacy policy, and support
 # documentation.
 
-
 on:
   schedule:
-    - cron: '43 18 * * *'
+    - cron: '24 7 * * *'
   push:
-    branches: [ "graalvm" ]
+    branches: [ "amd64" ]
     # Publish semver tags as releases.
     tags: [ 'v*.*.*' ]
   pull_request:
-    branches: [ "graalvm" ]
+    branches: [ "amd64" ]
 
 env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
   IMAGE_NAME: ${{ github.repository }}
+
 
 jobs:
   build:
@@ -75,13 +75,11 @@ jobs:
         uses: docker/build-push-action@ac9327eae2b366085ac7f6a2d02df8aa8ead720a
         with:
           context: .
-          platforms: linux/amd64
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-          
 
 
       # Sign the resulting Docker image digest except on PRs.
