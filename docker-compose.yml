@@ -2,9 +2,9 @@ version: '3.8'
 
 services:
   app:
-#    build:
-#      context: .
-#      dockerfile: Dockerfile-graalvm
+    build:
+      context: .
+      dockerfile: Dockerfile-old
 
     #image: ghcr.io/chatgut/worthreadingservice:latest
     #image: ghcr.io/chatgut/worthreadingservice:master
