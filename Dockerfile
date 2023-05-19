@@ -19,6 +19,20 @@
 
 
 
+FROM maven:3.9.1-eclipse-temurin-17 as build
+
+COPY . /app
+WORKDIR /app
+RUN mvn clean package
+
+FROM eclipse-temurin:17-jre
+COPY --from=build /app/target/*.jar /app.jar
+
+ENTRYPOINT java --module-path /app:app/lib:app/lib/consumer.jar -m org.example.consumer/org.example.consumer.Consumer
+ENTRYPOINT ["java","-jar","/app.jar"]
+
+
+
 
 ##################FOR JVM COMPILE#######################
 
@@ -34,31 +48,6 @@
 #WORKDIR /app
 #EXPOSE 8005
 #ENTRYPOINT ["java","-jar","/app.jar"]
-
-
-FROM maven:3.9-eclipse-temurin-17 as build
-COPY . /app
-WORKDIR /app
-RUN mvn clean package
-
-
-FROM maven:3.9-eclipse-temurin-17
-COPY --from=build /app/target/*.jar /app/worthreadingservice.jar
-EXPOSE 8005
-
-ENTRYPOINT ["java", "-jar", "/app/postservice.jar"]
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 ######################FOR RELEASE##########################
