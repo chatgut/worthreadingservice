@@ -2,14 +2,14 @@ version: '3.8'
 
 services:
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile-old
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
 
     #image: ghcr.io/chatgut/worthreadingservice:latest
     #image: ghcr.io/chatgut/worthreadingservice:master
     #image: ghcr.io/chatgut/worthreadingservice
-    #image: cchriss123/worthreadingservice:1.4.0
+    image: cchriss123/worthreadingservice:1.0.0
     container_name: worthreadingservice
     depends_on:
       mysql:

@@ -33,9 +33,7 @@ It is a part of a larger application and provides RESTful APIs to handle likes o
 
 ## Download docker image
 #### Native arm64 image:
-- docker pull cchriss123/worthreadingservice:1.1.0
+- docker pull cchriss123/worthreadingservice:1.0.0
 
 #### Regular JVM version image
 - docker pull ghcr.io/chatgut/worthreadingservice:latest
-
-
