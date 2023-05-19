@@ -2,10 +2,10 @@ version: '3.8'
 
 services:
   app:
-#    build:
-#      context: .
-#      dockerfile: Dockerfile
-    image: cchriss123/worthreadingservice:arm64
+    build:
+      context: .
+      dockerfile: Dockerfile
+    #image: cchriss123/worthreadingservice:arm64
     container_name: worthreadingservice
     depends_on:
       mysql:
