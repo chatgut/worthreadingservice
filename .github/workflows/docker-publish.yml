@@ -6,6 +6,7 @@ on:
   push:
     branches: [ "master" ]
   # tags: [ 'amd64 native' ]
+    tags: [ 'JVM' ]
   pull_request:
     branches: [ "master" ]
 
