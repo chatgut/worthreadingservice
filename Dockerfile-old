@@ -1,5 +1,6 @@
 FROM openjdk:17-jdk-slim
 
+RUN mvn clean package
 COPY target/*.jar app.jar
 WORKDIR /app
 EXPOSE 8005
