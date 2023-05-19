@@ -1,4 +1,5 @@
 FROM container-registry.oracle.com/graalvm/native-image:latest as graalvm
+
 RUN microdnf -y install wget unzip zip findutils tar
 
 COPY . /app
@@ -16,10 +17,6 @@ EXPOSE 8005
 COPY --from=graalvm app/target/worthreadingservice /app
 
 ENTRYPOINT ["/app"]
-
-
-
-
 
 
 ########################################################
