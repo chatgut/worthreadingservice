@@ -36,15 +36,37 @@
 #ENTRYPOINT ["java","-jar","/app.jar"]
 
 
+FROM maven:3.9-eclipse-temurin-17 as build
+COPY . /app
+WORKDIR /app
+RUN mvn clean package
+
+
+FROM maven:3.9-eclipse-temurin-17
+COPY --from=build /app/target/*.jar /app/worthreadingservice.jar
+EXPOSE 8005
+
+ENTRYPOINT ["java", "-jar", "/app/postservice.jar"]
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 ######################FOR RELEASE##########################
-
-FROM openjdk:17-jdk-slim
-
-#RUN mvn clean package
-COPY target/*.jar app.jar
-WORKDIR /app
-EXPOSE 8005
-ENTRYPOINT ["java","-jar","/app.jar"]
+#
+#FROM openjdk:17-jdk-slim
+#
+##RUN mvn clean package
+#COPY target/*.jar app.jar
+#WORKDIR /app
+#EXPOSE 8005
+#ENTRYPOINT ["java","-jar","/app.jar"]
