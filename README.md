@@ -32,8 +32,12 @@ It is a part of a larger application and provides RESTful APIs to handle likes o
 - GET /like/users/{messageId}
 
 ## Download docker image
+#### Native x86-64 image:
+- docker pull ghcr.io/chatgut/worthreadingservice-amd64:master
+
 #### Native arm64 image:
-- docker pull cchriss123/worthreadingservice:1.0.0
+- docker pull cchriss123/worthreadingservice:arm64
 
 #### Regular JVM version image
-- docker pull ghcr.io/chatgut/worthreadingservice:latest
+- docker pull ghcr.io/chatgut/worthreadingservice:master
+- docker pull cchriss123/worthreadingservice:jvm
