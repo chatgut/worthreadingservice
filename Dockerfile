@@ -4,7 +4,6 @@ COPY pom.xml ./
 COPY src ./src
 RUN mvn clean package
 
-
 FROM openjdk:17-jdk-slim
 COPY --from=build /app/target/*.jar /app.jar
 WORKDIR /app
