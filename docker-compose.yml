@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    #image: cchriss123/worthreadingservice:arm64
+    #image: cchriss123/worthreadingservice:jvm
     container_name: worthreadingservice
     depends_on:
       mysql:
