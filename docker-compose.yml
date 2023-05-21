@@ -2,9 +2,13 @@ version: '3.8'
 
 services:
   app:
+
 #    build:
 #      context: .
 #      dockerfile: Dockerfile
+#
+#    image: ghcr.io/chatgut/worthreadingservice:master
+#    image: cchriss123/worthreadingservice:jvm
     image: cchriss123/worthreadingservice:arm64
     container_name: worthreadingservice
     depends_on:

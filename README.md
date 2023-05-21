@@ -3,9 +3,9 @@
 The Worth Reading Service is a Java-based microservice managing the liking functionality for messages. \
 It is a part of a larger application and provides RESTful APIs to handle likes on messages.
 
-### Runs on port 8005 with with a MYSQL database on port 3306.
+### Runs on port 8005 with a MYSQL database on port 3306.
 
-### Run docker compose to build application and database in container
+### Run docker compose with the correct image for your machine to build application and database in container
 
 ## API Endpoints
 
