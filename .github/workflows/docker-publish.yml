@@ -5,7 +5,7 @@ on:
     - cron: '34 13 * * *'
   push:
     branches: [ "jvm" ]
-    tags: [ 'jvm' ]
+    tags: [ 'vanillaJVM' ]
   pull_request:
     branches: [ "jvm" ]
 
