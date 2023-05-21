@@ -5,7 +5,7 @@ on:
     - cron: '34 13 * * *'
   push:
     branches: [ "jvm" ]
-    tags: [ 'vanillaJVM' ]
+    tags: [ 'arm64 native' ]
   pull_request:
     branches: [ "jvm" ]
 
