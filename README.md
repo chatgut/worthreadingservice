@@ -39,4 +39,4 @@ It is a part of a larger application and provides RESTful APIs to handle likes o
 - docker pull cchriss123/worthreadingservice:arm64
 
 #### JVM image
-- docker pull ghcr.io/chatgut/worthreadingservice:jvm
+- docker pull cchriss123/worthreadingservice:jvm
