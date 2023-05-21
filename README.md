@@ -9,19 +9,19 @@ It is a part of a larger application and provides RESTful APIs to handle likes o
 
 ## API Endpoints
 
-#### Toggle Like: 
+#### Toggle like: 
 - PUT /like/toggleLike/{messageId}
 
-#### Bulk Check: 
+#### Bulk check if messages is liked by this user: 
 - GET /like/bulkIsLiked
 
-#### Is Liked: 
+#### Check if message is liked by this user: 
 - GET /like/isLiked/{messageId}/{userId}
  
-#### Get Likes: 
+#### Get amount of likes on message by all users: 
 - GET /like/amount/{messageId}
 
-#### Users who Liked: 
+#### Get users who liked message (Not fully implemented. Requires userservice 2 running on the local machine):
 - GET /like/users/{messageId}
 
 ## Download docker image
