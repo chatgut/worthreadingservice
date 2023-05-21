@@ -5,13 +5,6 @@ It is a part of a larger application and provides RESTful APIs to handle likes o
 
 ### Runs on port 8005 with with a MYSQL database on port 3306.
 
-## Native compile
-- export JAVA_HOME=/Library/Java/JavaVirtualMachines/graalvm-ce-java17-22.3.1/Contents/Home 
-- mvn clean package -Pnative native:compile -DskipTests
-
-## JVM compile 
-- mvn clean package 
-
 ### Run docker compose to build application and database in container
 
 ## API Endpoints

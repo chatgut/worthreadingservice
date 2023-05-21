@@ -1,4 +1,4 @@
-FROM container-registry.oracle.com/graalvm/native-image:latest as graalvm
+FROM container-registry.oracle.com/graalvm/native-image:latest AS graalvm
 
 RUN microdnf -y install wget unzip zip findutils tar
 
@@ -17,11 +17,3 @@ EXPOSE 8005
 COPY --from=graalvm app/target/worthreadingservice /app
 
 ENTRYPOINT ["/app"]
-
-
-#FROM openjdk:17-jdk-slim
-##RUN mvn clean package
-#COPY target/*.jar app.jar
-#WORKDIR /app
-#EXPOSE 8005
-#ENTRYPOINT ["java","-jar","/app.jar"]
