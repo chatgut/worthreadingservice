@@ -5,7 +5,6 @@ on:
     - cron: '34 13 * * *'
   push:
     branches: [ "jvm" ]
-    # Publish semver tags as releases.
     tags: [ 'jvm' ]
   pull_request:
     branches: [ "jvm" ]
