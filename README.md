@@ -31,5 +31,5 @@ It is a part of a larger application and provides RESTful APIs to handle likes o
 #### Native arm64 image:
 - docker pull cchriss123/worthreadingservice:arm64
 
-#### JVM image
+#### JVM image:
 - docker pull cchriss123/worthreadingservice:jvm
