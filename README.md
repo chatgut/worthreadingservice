@@ -1,27 +1,28 @@
 # Worthreadingservice
 
 The Worth Reading Service is a Java-based microservice managing the liking functionality for messages. \
-It is a part of a larger application and provides RESTful APIs to handle likes on messages.
+It is a part of a larger application and provides RESTful APIs to handle likes on messages. \
+This service utilizes GraalVM to build native images, enabling faster startup times and optimized performance.
 
 ### Runs on port 8005 with a MYSQL database on port 3306.
 
-### Run docker compose with the correct image for your machine to build application and database in container
+#### Run docker compose with the correct image for your machine to build application and database in container.
 
 ## API Endpoints
 
-#### Toggle Like: 
+#### Toggle like: 
 - PUT /like/toggleLike/{messageId}
 
-#### Bulk Check: 
+#### Bulk check if messages is liked by this user: 
 - GET /like/bulkIsLiked
 
-#### Is Liked: 
+#### Check if message is liked by this user: 
 - GET /like/isLiked/{messageId}/{userId}
  
-#### Get Likes: 
+#### Get amount of likes on message: 
 - GET /like/amount/{messageId}
 
-#### Users who Liked: 
+#### Get users who liked message (Not fully implemented. Requires userservice 2 running on the local machine):
 - GET /like/users/{messageId}
 
 ## Download docker image
@@ -31,5 +32,5 @@ It is a part of a larger application and provides RESTful APIs to handle likes o
 #### Native arm64 image:
 - docker pull cchriss123/worthreadingservice:arm64
 
-#### JVM image
+#### JVM image:
 - docker pull cchriss123/worthreadingservice:jvm
