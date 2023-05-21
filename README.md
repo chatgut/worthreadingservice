@@ -1,7 +1,8 @@
 # Worthreadingservice
 
 The Worth Reading Service is a Java-based microservice managing the liking functionality for messages. \
-It is a part of a larger application and provides RESTful APIs to handle likes on messages.
+It is a part of a larger application and provides RESTful APIs to handle likes on messages. \
+This service utilizes GraalVM to build native images, enabling faster startup times and optimized performance.
 
 ### Runs on port 8005 with a MYSQL database on port 3306.
 
