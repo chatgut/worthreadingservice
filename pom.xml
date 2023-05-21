@@ -22,7 +22,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
@@ -57,25 +56,6 @@
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.graalvm.buildtools</groupId>
-                <artifactId>native-maven-plugin</artifactId>
-                <configuration>
-                    <metadataRepository>
-                        <enabled>true</enabled>
-                        <version>0.2.6</version>
-                    </metadataRepository>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>build-native</id>
-                        <goals>
-                            <goal>compile-no-fork</goal>
-                        </goals>
-                        <phase>package</phase>
-                    </execution>
-                </executions>
-            </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
