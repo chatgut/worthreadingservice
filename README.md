@@ -18,7 +18,7 @@ It is a part of a larger application and provides RESTful APIs to handle likes o
 #### Check if message is liked by this user: 
 - GET /like/isLiked/{messageId}/{userId}
  
-#### Get amount of likes on message by all users: 
+#### Get amount of likes on message: 
 - GET /like/amount/{messageId}
 
 #### Get users who liked message (Not fully implemented. Requires userservice 2 running on the local machine):
