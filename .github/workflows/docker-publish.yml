@@ -11,7 +11,7 @@ on:
   push:
     branches: [ "master" ]
     # Publish semver tags as releases.
-    tags: [ 'amd64 native' ]
+    tags: [ 'amd64native' ]
   pull_request:
     branches: [ "master" ]
 
