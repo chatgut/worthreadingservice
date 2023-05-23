@@ -6,7 +6,7 @@ services:
 #    build:
 #      context: .
 #      dockerfile: Dockerfile
-#
+
 #    image: ghcr.io/chatgut/worthreadingservice:master
 #    image: cchriss123/worthreadingservice:jvm
     image: cchriss123/worthreadingservice:arm64

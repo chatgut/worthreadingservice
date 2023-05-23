@@ -1,0 +1,124 @@
+version: '3.8'
+services:
+
+
+  auth:
+    image: cchriss123/authservice:latest
+    container_name: auth
+    depends_on:
+      - auth-DB
+    environment:
+      DB_URL: auth-DB/auth-DB1
+      DB_USER: developer
+      DB_PASS: password
+    ports:
+      - "8003:8080"
+  auth-DB:
+    image: 'mysql:latest'
+    container_name: auth-DB1
+    volumes:
+      - authDbData:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: auth-DB1
+      MYSQL_USER: developer
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - "3307:3306"
+
+
+  like:
+    image: cchriss123/worthreadingservice:arm64
+    container_name: worthreadingservice
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      DB_URL: jdbc:mysql://mysql:3306/demo
+      DB_USER: developer
+      DB_PASS: password
+    ports:
+      - "8005:8005"
+  like-DB:
+    image: 'mysql:latest'
+    container_name: like-Db
+    volumes:
+      - likeDbData:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: demo
+      MYSQL_USER: developer
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - '3306:3306'
+    healthcheck:
+      test: [ "CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -u $$MYSQL_USER -p$$MYSQL_PASSWORD" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+
+
+  img:
+    image: cchriss123/imageservice:arm64
+    container_name: imageservice
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      DB_URL: jdbc:mysql://mysql:3306/demo
+      DB_USER: developer
+      DB_PASS: password
+    ports:
+      - "8001:8001"
+  mysql:
+    image: 'mysql:latest'
+    container_name: img-Db
+    volumes:
+      - imgAppData:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: demo
+      MYSQL_USER: developer
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - '3308:3306'
+    healthcheck:
+      test: [ "CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -u $$MYSQL_USER -p$$MYSQL_PASSWORD" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+
+  userservice:
+    image: cchriss123/user
+    ports:
+      - "8002:8002"
+    environment:
+      DB_URL: userservice-mysql:3306/userservice-mysql
+      DB_USER: developer
+      DB_PASS: password
+  userservice-mysql:
+    image: "mysql:latest"
+    container_name: userservice-mysql
+    volumes:
+      - db_mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_HOST: "%"
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: userservice-mysql
+      MYSQL_USER: developer
+      MYSQL_PASSWORD: password
+      MYSQL_HOST: '%'
+    ports:
+      - "3309:3306"
+
+
+volumes:
+  authDbData:
+  likeDbData:
+  imgAppData:
+  db_mysql:

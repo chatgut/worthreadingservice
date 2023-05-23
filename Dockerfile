@@ -17,3 +17,4 @@ EXPOSE 8005
 COPY --from=graalvm app/target/worthreadingservice /app
 
 ENTRYPOINT ["/app"]
+#
