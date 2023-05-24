@@ -2,13 +2,13 @@ version: '3.8'
 services:
 
 
-  auth:
-    image: cchriss123/authservice:latest
+  authservice:
+    image: ghcr.io/chatgut/authservice2:latest
     container_name: auth
     depends_on:
       - auth-DB
     environment:
-      DB_URL: auth-DB/auth-DB1
+      DB_URL: auth-DB:3306/auth-DB1
       DB_USER: developer
       DB_PASS: password
     ports:
@@ -17,15 +17,13 @@ services:
     image: 'mysql:latest'
     container_name: auth-DB1
     volumes:
-      - authDbData:/var/lib/mysql
+      - dbAuth:/var/lib/mysql
     environment:
       MYSQL_DATABASE: auth-DB1
       MYSQL_USER: developer
       MYSQL_PASSWORD: password
       MYSQL_ROOT_HOST: '%'
       MYSQL_ROOT_PASSWORD: password
-    ports:
-      - "3307:3306"
 
 
   like:
@@ -117,8 +115,11 @@ services:
       - "3309:3306"
 
 
+
+
 volumes:
   authDbData:
   likeDbData:
   imgAppData:
   db_mysql:
+  dbAuth:
