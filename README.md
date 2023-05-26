@@ -12,9 +12,11 @@ This service utilizes GraalVM to build native images, enabling faster startup ti
 
 #### Toggle like: 
 - PUT /like/toggleLike/{messageId}
+- Header: userId 
 
 #### Bulk check if messages is liked by this user: 
 - GET /like/bulkIsLiked
+- Header: userId 
 
 #### Check if message is liked by this user: 
 - GET /like/isLiked/{messageId}/{userId}
